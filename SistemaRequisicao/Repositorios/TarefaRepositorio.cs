@@ -53,7 +53,8 @@ namespace SistemaRequisicao.Repositorios
             _dbContext.Tarefa.Update(tarefaID);
             await _dbContext.SaveChangesAsync();
 
-            return tarefaID;    
+            return tarefaID;
+
         }
     }
 }

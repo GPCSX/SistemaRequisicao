@@ -24,6 +24,7 @@ namespace SistemaRequisicao
                 );
 
             builder.Services.AddScoped<ITarefaRepositorio, TarefaRepositorio>();
+            builder.Services.AddScoped<IFeriadoService, FeriadoService>();
 
             var app = builder.Build();
 

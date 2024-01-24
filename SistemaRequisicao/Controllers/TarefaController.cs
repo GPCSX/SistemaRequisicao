@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using SistemaRequisicao.Models;
 using SistemaRequisicao.Repositorios.Interfaces;
+using System; 
+using System.Threading.Tasks;
 
 namespace SistemaRequisicao.Controllers
 {
@@ -49,5 +51,36 @@ namespace SistemaRequisicao.Controllers
             bool tarefa = await _tarefaRepositorio.Apagar(id);
             return Ok(tarefa);
         }
+
+        [Route("api/[controller]")]
+        [ApiController]
+        public class TarefaControllerF : ControllerBase
+        {
+            private readonly ITarefaRepositorio _tarefaRepositorio;
+            private readonly IFeriadoService _feriadoService;
+
+            public TarefaControllerF(ITarefaRepositorio tarefaRepositorio, IFeriadoService feriadoService)
+            {
+                _tarefaRepositorio = tarefaRepositorio;
+                _feriadoService = feriadoService;
+            }
+
+            // ... outros métodos
+
+            [HttpGet("VerificarFeriado")]
+            public async Task<ActionResult<bool>> VerificarFeriado([FromQuery] string data)
+            {
+                try
+                {
+                    bool ehFeriado = await _feriadoService.VerificarFeriado(data);
+                    return Ok(ehFeriado);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Erro ao verificar feriado: {ex.Message}");
+                }
+            }
+        }
+
     }
 }

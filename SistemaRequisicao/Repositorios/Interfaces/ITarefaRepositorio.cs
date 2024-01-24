@@ -8,5 +8,6 @@ namespace SistemaRequisicao.Repositorios.Interfaces
         Task<TarefaModel> Adicionar(TarefaModel tarefa);
         Task<TarefaModel> Atualizar(TarefaModel tarefa, int id);
         Task<bool> Apagar(int id);
+
     }
 }
